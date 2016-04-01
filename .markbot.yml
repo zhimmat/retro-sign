@@ -74,19 +74,22 @@ functionality:
           if (totalEvents <= 0) pass();
         };
 
-        btnFill.addEventListener('transitionend', function () {
+        on('.btn path:nth-child(2)', 'transitionend', function (err, ev) {
+          if (err) fail('The transition on the button’s coloured setion never ends—check that is has a transition');
           if (oldBtnFill == css(btnFill).fill) fail('The button doesn’t change colour');
           totalEvents--;
           checkPass();
         });
 
-        path.addEventListener('animationend', function () {
+        on('.lines path', 'animationend', function (err, ev) {
+          if (err) fail('The animation on the lines never ends—check that they have an animation');
           if (oldStrokeDasharray == css(path).strokeDasharray) fail('The `stroke-dasharray` doesn’t change in the animation');
           totalEvents--;
           checkPass();
         });
 
-        letterE.addEventListener('transitionend', function () {
+        on('.engage path:first-child', 'transitionend', function (err, ev) {
+          if (err) fail('The transition never ends on the letters—check that they have a transision');
           if (oldLetterEFill == css(letterE).fill) fail('The letters don’t change colour');
           totalEvents--;
           checkPass();
